@@ -20,7 +20,6 @@ public class BlogPostService implements BlogPostServiceInterface {
 
     @Override
     public List<BlogPost> fetchAllBlogPosts() {
-        //return List.of(); detta var från början men null i videon
         return blogPostRepository.findAll();
     }
 

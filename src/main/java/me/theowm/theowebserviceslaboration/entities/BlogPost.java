@@ -14,7 +14,7 @@ public class BlogPost {
     private String content;
 
     @Column(nullable = false)
-    private String author_id;
+    private String authorId;
 
     public BlogPost() {
     }
@@ -43,11 +43,11 @@ public class BlogPost {
         this.content = content;
     }
 
-    public String getAuthor_id() {
-        return author_id;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor_id(String authorId) {
-        this.author_id = authorId;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 }
