@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -31,19 +34,19 @@ public class BlogPostController {
     }
 
     @PostMapping("/api/v2/newpost")
-    public ResponseEntity<BlogPost> addNewBlogPost(@RequestBody BlogPost blogPost) {
-        return new ResponseEntity<>(blogPostService.addNewBlogPost(blogPost), HttpStatus.CREATED);
+    public ResponseEntity<BlogPost> addNewBlogPost(@RequestBody BlogPost blogPost, Authentication authentication) {
+        return new ResponseEntity<>(blogPostService.addNewBlogPost(blogPost, authentication), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/api/v2/deletepost/{id}")
-    public ResponseEntity<String> deleteBlogPostById(@PathVariable int blogPostId) {
-        blogPostService.deleteBlogPost(blogPostId);
-        return ResponseEntity.ok("Blog post " + blogPostId + " was deleted.");
+    public ResponseEntity<String> deleteBlogPostById(@PathVariable int id, Authentication authentication) {
+        blogPostService.deleteBlogPost(id, authentication);
+        return ResponseEntity.ok("Blog post " + id + " was deleted.");
     }
 
     @PutMapping("/api/v2/updatepost/{id}")
-    public ResponseEntity<BlogPost> updateBlogPost(@PathVariable int blogPostId, @RequestBody BlogPost blogPost) {
-        return ResponseEntity.ok(blogPostService.updateBlogPost(blogPostId, blogPost));
+    public ResponseEntity<BlogPost> updateBlogPost(@PathVariable int id, @RequestBody BlogPost blogPost, Authentication authentication) {
+        return ResponseEntity.ok(blogPostService.updateBlogPost(id, blogPost, authentication));
     }
 
     @GetMapping("/api/v2/count")

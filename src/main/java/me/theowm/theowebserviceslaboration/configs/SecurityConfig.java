@@ -25,8 +25,8 @@ public class SecurityConfig {
                         auth
                                 .requestMatchers("/api/v2/posts").authenticated()
                                 .requestMatchers("/api/v2/post/{postId}").authenticated()
-                                .requestMatchers("/api/v2/newpost").hasRole("myclient_user")
-                                .requestMatchers("/api/v2/updatepost").hasRole("myclient_user")
+                                .requestMatchers("/api/v2/newpost").hasAnyRole("myclient_user", "myclient_admin")
+                                .requestMatchers("/api/v2/updatepost").hasAnyRole("myclient_user", "myclient_admin")
                                 .requestMatchers("/api/v2/deletepost/{id}").hasAnyRole("myclient_user", "myclient_admin")
                                 .requestMatchers("/api/v2/count").hasRole("myclient_admin")
                                 .anyRequest().authenticated()
